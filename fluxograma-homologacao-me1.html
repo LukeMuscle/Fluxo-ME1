@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma - Homologação ME1 Mercado Livre</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .section p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .mermaid {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .legend {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .legend h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .legend ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .legend li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .legend li:before {
+            content: "▸ ";
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box strong {
+            color: #856404;
+        }
+        
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .toc {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .toc h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            padding: 8px 0;
+        }
+        
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Fluxograma - Homologação ME1</h1>
+        <p class="subtitle">Guia Visual Completo do Processo de Homologação do Mercado Envios 1</p>
+        
+        <div class="toc">
+            <h3>📑 Índice</h3>
+            <ul>
+                <li><a href="#fluxo-principal">1. Fluxo Principal de Homologação</a></li>
+                <li><a href="#erros">2. Fluxo de Tratamento de Erros</a></li>
+                <li><a href="#estruturas">3. Estruturas de Dados</a></li>
+                <li><a href="#checklist">4. Checklist de Homologação</a></li>
+            </ul>
+        </div>
+        
+        <div class="section" id="fluxo-principal">
+            <h2>1. Fluxo Principal de Homologação</h2>
+            <p>Este diagrama mostra o processo completo desde a verificação de certificação até a aprovação final.</p>
+            
+            <div class="info-box">
+                <strong>💡 Importante:</strong> Apenas integradores certificados podem solicitar homologação. Se você ainda não é certificado, participe do Developer Partner Program.
+            </div>
+            
+            <div class="mermaid">
+flowchart TD
+    Start([Início: Integrador em Processo de Certificação]) --> CheckCert{É Integrador<br/>ME1?}
+    CheckCert -->|Não| PartnerProgram[Participar do DPP<br/>em sua categoria de desenvolvimento]
+    CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificação]
+    
+    CreateEndpoint --> ValidateSpec[Validar Especificações:<br/>- Request/Response<br/>- Headers HTTP<br/>- Cache RFC 7234]
+    
+    ValidateSpec --> TestPerformance[Testar Performance:<br/>Tempo de resposta < 400ms]
+    
+    TestPerformance -->|> 400ms| Optimize[Otimizar código<br/>e infraestrutura]
+    Optimize --> TestPerformance
+    
+    TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo]
+    
+    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade]
+    
+    MELITests -->|Aprovado| Approved[Homologação Aprovada]
+    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados]
+    FixIssues --> ValidateSpec
+    
+    Approved --> SetupContingency[Configurar Tabela<br/>de Contingência]
+    SetupContingency --> Monitor[Monitorar Performance<br/>via endpoint de métricas]
+    
+    Monitor --> End([Sistema em Produção])
+    
+    style Start fill:#e1f5ff,stroke:#2196F3,stroke-width:3px
+    style Approved fill:#d4edda,stroke:#28a745,stroke-width:3px
+    style End fill:#d4edda,stroke:#28a745,stroke-width:3px
+    style PartnerProgram fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style FixIssues fill:#f8d7da,stroke:#dc3545,stroke-width:2px
+            </div>
+            
+            <div class="legend">
+                <h3>Legenda de Cores</h3>
+                <ul>
+                    <li><strong>Azul claro:</strong> Início do processo</li>
+                    <li><strong>Verde:</strong> Aprovação e conclusão</li>
+                    <li><strong>Amarelo:</strong> Ações necessárias antes de continuar</li>
+                    <li><strong>Vermelho:</strong> Problemas que precisam ser corrigidos</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section" id="erros">
+            <h2>2. Fluxo de Tratamento de Erros e Contingência</h2>
+            <p>Como o sistema lida com diferentes tipos de erros e quando ativar a Tabela de Contingência.</p>
+            
+            <div class="mermaid">
+flowchart TD
+    ErrorOccurs[Erro ocorre no<br/>endpoint do integrador] --> ErrorType{Tipo de<br/>Erro?}
+    
+    ErrorType -->|Erro Interno -1| ActivateContingency[Ativar Tabela<br/>de Contingência]
+    ErrorType -->|Produto sem estoque 1| ShowAlternatives[Mostrar produtos<br/>alternativos]
+    ErrorType -->|Destino inválido 2| CheckContingencyTable{Consultar Tabela<br/>de Contingência}
+    ErrorType -->|Sem cobertura 3| CheckContingencyTable
+    ErrorType -->|Produto não encontrado 4| UpdateDatabase[Atualizar banco<br/>de dados]
+    
+    CheckContingencyTable -->|Tem dados| UseContingency[Usar dados da<br/>Tabela de Contingência]
+    CheckContingencyTable -->|Sem dados| ReturnError[Retornar erro<br/>ao comprador]
+    
+    ActivateContingency --> UseContingency
+    UseContingency --> ReturnQuote[Retornar cotação<br/>da contingência]
+    
+    ShowAlternatives --> End([Fim])
+    ReturnError --> End
+    ReturnQuote --> End
+    UpdateDatabase --> End
+    
+    style ActivateContingency fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style UseContingency fill:#d1ecf1,stroke:#17a2b8,stroke-width:2px
+    style ReturnError fill:#f8d7da,stroke:#dc3545,stroke-width:2px
+            </div>
+            
+            <div class="info-box">
+                <strong>📋 Tabela de Contingência:</strong> É uma planilha de transportadoras que serve como backup quando o endpoint falha. O vendedor deve mantê-la atualizada tanto no integrador quanto no Mercado Livre.
+            </div>
+            
+            <div class="code-block">
+Códigos de Erro:
+-1: Erro interno → Ativa contingência automaticamente
+ 1: Produto sem estoque → Mostrar alternativas
+ 2: Destino inválido → Consultar tabela de contingência
+ 3: Sem cobertura → Consultar tabela de contingência (HTTP 400)
+ 4: Produto não encontrado → Atualizar banco de dados
+            </div>
+        </div>
+
+        <div class="section" id="estruturas">
+            <h2>3. Estruturas de Dados</h2>
+            <p>Diagramas de classes mostrando a estrutura completa dos objetos Request e Response.</p>
+            
+            <h3 style="margin-top: 20px; color: #2c3e50;">Request (Entrada)</h3>
+            <div class="mermaid">
+classDiagram
+    class Request {
+        +string seller_id
+        +string buyer_id
+        +float declared_value
+        +Item[] items
+        +Destination destination
+        +Origin origin
+    }
+    
+    class Item {
+        +string id
+        +string variation_id
+        +string category_id
+        +float price
+        +int quantity
+        +string sku
+        +string store_id
+        +Dimensions dimensions
+    }
+    
+    class Dimensions {
+        +int height
+        +int width
+        +int length
+        +int weight
+    }
+    
+    class Destination {
+        +string type
+        +string value
+    }
+    
+    class Origin {
+        +string type
+        +string value
+    }
+    
+    Request --> Item
+    Request --> Destination
+    Request --> Origin
+    Item --> Dimensions
+            </div>
+            
+            <h3 style="margin-top: 30px; color: #2c3e50;">Response (Saída)</h3>
+            <div class="mermaid">
+classDiagram
+    class Response {
+        +string[] destinations
+        +Package[] packages
+    }
+    
+    class Package {
+        +Dimensions dimensions
+        +Item[] items
+        +Quotation[] quotations
+    }
+    
+    class ResponseItem {
+        +string id
+        +string variation_id
+        +int quantity
+        +Dimensions dimensions
+    }
+    
+    class Quotation {
+        +float price
+        +int handling_time
+        +int shipping_time
+        +int promise
+        +int service
+    }
+    
+    class Dimensions {
+        +int height
+        +int width
+        +int length
+        +int weight
+    }
+    
+    Response --> Package
+    Package --> ResponseItem
+    Package --> Dimensions
+    Package --> Quotation
+    ResponseItem --> Dimensions
+            </div>
+        </div>
+        
+        <div class="section" id="checklist">
+            <h2>4. Checklist de Homologação</h2>
+            <p>Lista completa de verificação antes de solicitar a homologação.</p>
+            
+            <div class="mermaid">
+flowchart TD
+    Start([Checklist de Homologação]) --> C1[✓ Integrador Certificado]
+    C1 --> C2[✓ Endpoint GET criado]
+    C2 --> C3[✓ Request formatado corretamente]
+    C3 --> C4[✓ Response formatada corretamente]
+    C4 --> C5[✓ Headers HTTP implementados]
+    C5 --> C6[✓ Cache RFC 7234 implementado]
+    C6 --> C7[✓ Tempo de resposta < 400ms]
+    C7 --> C8[✓ Tratamento de erros implementado]
+    C8 --> C9[✓ Códigos de erro corretos]
+    C9 --> C10[✓ Tabela de Contingência configurada]
+    C10 --> C11[✓ Documentação completa]
+    C11 --> C12[✓ Vídeo demonstrativo criado]
+    C12 --> Ready([Pronto para Homologação])
+    
+    style Start fill:#e1f5ff,stroke:#2196F3,stroke-width:3px
+    style Ready fill:#d4edda,stroke:#28a745,stroke-width:3px
+    style C1 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C2 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C3 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C4 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C5 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C6 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C7 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C8 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C9 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C10 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C11 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C12 fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+            </div>
+            
+            <div class="success-box">
+                <strong>✅ Documentação Necessária:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>URL ou endpoint que deseja registrar</li>
+                    <li>Headers necessários para a comunicação</li>
+                    <li>Formato do corpo ou JSON request em conformidade</li>
+                    <li>Nome e ID da sua aplicação</li>
+                    <li>Vídeo curto demonstrando o desenvolvimento</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📚 Recursos Adicionais</h2>
+            <div class="info-box">
+                <strong>🔗 Links Úteis:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><a href="https://developers.mercadolivre.com.br/pt_br/frete-dinamico" target="_blank">Documentação Oficial - Frete Dinâmico</a></li>
+                    <li><a href="https://developers.mercadolivre.com.br/pt_br/primeiros-passos" target="_blank">Primeiros Passos - Mercado Livre API</a></li>
+                    <li><a href="https://tools.ietf.org/html/rfc7234" target="_blank">RFC 7234 - HTTP Caching</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35
+            }
+        });
+    </script>
+</body>
+</html>
