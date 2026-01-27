@@ -191,42 +191,71 @@
             <h3>📑 Índice</h3>
             <ul>
                 <li><a href="#fluxo-principal">1. Fluxo Principal de Homologação</a></li>
-                <li><a href="#erros">2. Fluxo de Tratamento de Erros</a></li>
-                <li><a href="#estruturas">3. Estruturas de Dados</a></li>
-                <li><a href="#checklist">4. Checklist de Homologação</a></li>
+                <li><a href="#estruturas">2. Estruturas de Dados</a></li>
+                <li><a href="#checklist">3. Checklist de Homologação</a></li>
+                 <li><a href="#Recursos">4. Recursos Adicionais</a></li>
+
             </ul>
         </div>
         
         <div class="section" id="fluxo-principal">
             <h2>1. Fluxo Principal de Homologação</h2>
-            <p>Este diagrama mostra o processo completo desde a verificação de certificação até a aprovação final.</p>
+            <p>Este diagrama mostra o processo completo desde a verificação de homologação até a aprovação final.</p>
             
             <div class="info-box">
-                <strong>💡 Importante:</strong> Apenas integradores certificados podem solicitar homologação. Se você ainda não é certificado, participe do Developer Partner Program.
+                <strong>💡 Importante:</strong> Apenas integradores ME1 podem solicitar homologação. Se você ainda não é desenvolvedor em ME1, participe do Developer Partner Program em sua categoria.
             </div>
             
             <div class="mermaid">
 flowchart TD
-    Start([Início: Integrador em Processo de Certificação]) --> CheckCert{É Integrador<br/>ME1?}
+    Start([Início: Integrador em Processo de Homologação<br/>**Time OP**]) --> CheckCert{É Integrador<br/>ME1?}
     CheckCert -->|Não| PartnerProgram[Participar do DPP<br/>em sua categoria de desenvolvimento]
-    CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificação]
+    CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificação<br/> **Integrador**]
     
     CreateEndpoint --> ValidateSpec[Validar Especificações:<br/>- Request/Response<br/>- Headers HTTP<br/>- Cache RFC 7234]
     
-    ValidateSpec --> TestPerformance[Testar Performance:<br/>Tempo de resposta < 400ms]
+    ValidateSpec --> TestPerformance[Testar Performance:<br/>Tempo de resposta < 400ms<br/> **Integrador**]
     
     TestPerformance -->|> 400ms| Optimize[Otimizar código<br/>e infraestrutura]
     Optimize --> TestPerformance
     
-    TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo]
+    TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo<br/> **Integrador**]
     
-    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade]
+    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/>**Time OP e ME1 TI**]
     
     MELITests -->|Aprovado| Approved[Homologação Aprovada]
-    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados]
-    FixIssues --> ValidateSpec
+    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/> **Time OP e Integrador**]
+    FixIssues --> ValidateSpec[Validar especificação]
+    %% Conexão pedida: do primeiro FixIssues para o segundo fluxo
+    FixIssues -->|Retestar / Reprocessar| ErrorOccurs[Erro ocorre no<br/>endpoint do integrador]
+
+    %% Segundo fluxo (original)
+    ErrorOccurs --> ErrorType{Tipo de<br/>Erro?}
     
-    Approved --> SetupContingency[Configurar Tabela<br/>de Contingência]
+    ErrorType -->|Erro Interno -1| ActivateContingency[Ativar Tabela<br/>de Contingência]
+    ErrorType -->|Produto sem estoque 1| ShowAlternatives[Mostrar produtos<br/>alternativos]
+    ErrorType -->|Destino inválido 2| CheckContingencyTable{Consultar Tabela<br/>de Contingência}
+    ErrorType -->|Sem cobertura 3| CheckContingencyTable
+    ErrorType -->|Produto não encontrado 4| UpdateDatabase[Atualizar banco<br/>de dados]
+    
+    CheckContingencyTable -->|Tem dados| UseContingency[Usar dados da<br/>Tabela de Contingência]
+    CheckContingencyTable -->|Sem dados| ReturnError[Retornar erro<br/>ao comprador]
+    
+    ActivateContingency --> UseContingency
+    UseContingency --> ReturnQuote[Retornar cotação<br/>da contingência]
+    
+    ShowAlternatives --> End([Fim])
+    ReturnError --> End
+    ReturnQuote --> End
+    UpdateDatabase --> End
+    
+    %% Estilos
+    style ActivateContingency fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style UseContingency fill:#d1ecf1,stroke:#17a2b8,stroke-width:2px
+    style ReturnError fill:#f8d7da,stroke:#dc3545,stroke-width:2px
+    
+    
+    Approved --> SetupContingency[Configurar Tabela<br/>de Contingência<br/> **Time ME1 Growth**]
     SetupContingency --> Monitor[Monitorar Performance<br/>via endpoint de métricas]
     
     Monitor --> End([Sistema em Produção])
@@ -249,52 +278,9 @@ flowchart TD
             </div>
         </div>
         
-        <div class="section" id="erros">
-            <h2>2. Fluxo de Tratamento de Erros e Contingência</h2>
-            <p>Como o sistema lida com diferentes tipos de erros e quando ativar a Tabela de Contingência.</p>
-            
-            <div class="mermaid">
-flowchart TD
-    ErrorOccurs[Erro ocorre no<br/>endpoint do integrador] --> ErrorType{Tipo de<br/>Erro?}
-    
-    ErrorType -->|Erro Interno -1| ActivateContingency[Ativar Tabela<br/>de Contingência]
-    ErrorType -->|Produto sem estoque 1| ShowAlternatives[Mostrar produtos<br/>alternativos]
-    ErrorType -->|Destino inválido 2| CheckContingencyTable{Consultar Tabela<br/>de Contingência}
-    ErrorType -->|Sem cobertura 3| CheckContingencyTable
-    ErrorType -->|Produto não encontrado 4| UpdateDatabase[Atualizar banco<br/>de dados]
-    
-    CheckContingencyTable -->|Tem dados| UseContingency[Usar dados da<br/>Tabela de Contingência]
-    CheckContingencyTable -->|Sem dados| ReturnError[Retornar erro<br/>ao comprador]
-    
-    ActivateContingency --> UseContingency
-    UseContingency --> ReturnQuote[Retornar cotação<br/>da contingência]
-    
-    ShowAlternatives --> End([Fim])
-    ReturnError --> End
-    ReturnQuote --> End
-    UpdateDatabase --> End
-    
-    style ActivateContingency fill:#fff3cd,stroke:#ffc107,stroke-width:2px
-    style UseContingency fill:#d1ecf1,stroke:#17a2b8,stroke-width:2px
-    style ReturnError fill:#f8d7da,stroke:#dc3545,stroke-width:2px
-            </div>
-            
-            <div class="info-box">
-                <strong>📋 Tabela de Contingência:</strong> É uma planilha de transportadoras que serve como backup quando o endpoint falha. O vendedor deve mantê-la atualizada tanto no integrador quanto no Mercado Livre.
-            </div>
-            
-            <div class="code-block">
-Códigos de Erro:
--1: Erro interno → Ativa contingência automaticamente
- 1: Produto sem estoque → Mostrar alternativas
- 2: Destino inválido → Consultar tabela de contingência
- 3: Sem cobertura → Consultar tabela de contingência (HTTP 400)
- 4: Produto não encontrado → Atualizar banco de dados
-            </div>
-        </div>
 
         <div class="section" id="estruturas">
-            <h2>3. Estruturas de Dados</h2>
+            <h2>2. Estruturas de Dados</h2>
             <p>Diagramas de classes mostrando a estrutura completa dos objetos Request e Response.</p>
             
             <h3 style="margin-top: 20px; color: #2c3e50;">Request (Entrada)</h3>
@@ -388,7 +374,7 @@ classDiagram
         </div>
         
         <div class="section" id="checklist">
-            <h2>4. Checklist de Homologação</h2>
+            <h2>3. Checklist de Homologação</h2>
             <p>Lista completa de verificação antes de solicitar a homologação.</p>
             
             <div class="mermaid">
@@ -435,8 +421,8 @@ flowchart TD
             </div>
         </div>
         
-        <div class="section">
-            <h2>📚 Recursos Adicionais</h2>
+        <div class="section" id="Recursos">
+            <h2>📚 4. Recursos Adicionais</h2>
             <div class="info-box">
                 <strong>🔗 Links Úteis:</strong>
                 <ul style="margin-top: 10px; padding-left: 20px;">
