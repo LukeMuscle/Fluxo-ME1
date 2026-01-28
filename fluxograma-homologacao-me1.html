@@ -208,25 +208,27 @@
             
             <div class="mermaid">
 flowchart TD
-    Start([Início: Integrador em Processo de Homologação<br/>**Time OP**]) --> CheckCert{É Integrador<br/>ME1?}
+    Start([Início: Integrador em Processo de Homologação<br/><b>Time OP</b>]) --> CheckCert{É Integrador<br/>ME1?}
     CheckCert -->|Não| PartnerProgram[Participar do DPP<br/>em sua categoria de desenvolvimento]
-    CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificação<br/> **Integrador**]
+    CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificações de teste<br/><b>Integrador</b>]
     
-    CreateEndpoint --> ValidateSpec[Validar Especificações:<br/>- Request/Response<br/>- Headers HTTP<br/>- Cache RFC 7234]
+    CreateEndpoint --> ValidateSpec[Validar Especificações:<br/>- Request/Response<br/>- Headers HTTP<br/>- Cache RFC 7234<br/>- Collection de teste]
     
-    ValidateSpec --> TestPerformance[Testar Performance:<br/>Tempo de resposta < 400ms<br/> **Integrador**]
+    ValidateSpec --> TestPerformance[Testar Performance:<br/>Tempo de resposta < 400ms<br/><b>Integrador</b>]
     
     TestPerformance -->|> 400ms| Optimize[Otimizar código<br/>e infraestrutura]
     Optimize --> TestPerformance
     
-    TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo<br/> **Integrador**]
+    TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo<br/><b>Integrador</b>]
     
-    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/>**Time OP e ME1 TI**]
+    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/><b>Time OP e ME1 IT</b>]
     
     MELITests -->|Aprovado| Approved[Homologação Aprovada]
-    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/> **Time OP e Integrador**]
-    FixIssues --> ValidateSpec[Validar especificação]
-    %% Conexão pedida: do primeiro FixIssues para o segundo fluxo
+    %% Losango compacto abaixo da aprovação (texto com quebras de linha e fonte reduzida)
+    Approved --> ActivateIntegrator{Ativar Integrador<br/>Central ME1<br/><b>Time ME1 IT</b>}
+
+    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/><b>Time OP e Integrador</b>]
+    FixIssues --> ValidateSpec[Validar especificação Collection de teste<br/>vide Recursos Adicionais<br/><b>Integrador</b>]
     FixIssues -->|Retestar / Reprocessar| ErrorOccurs[Erro ocorre no<br/>endpoint do integrador]
 
     %% Segundo fluxo (original)
@@ -249,23 +251,21 @@ flowchart TD
     ReturnQuote --> End
     UpdateDatabase --> End
     
-    %% Estilos
+    ActivateIntegrator --> SetupContingency[Configurar Tabela<br/>de Contingência<br/><b>Time ME1 Growth</b>]
+    SetupContingency --> Monitor[Monitorar Performance<br/>via endpoint de métricas]
+    Monitor --> End([Sistema em Produção])
+    
+    %% Estilos / classes
     style ActivateContingency fill:#fff3cd,stroke:#ffc107,stroke-width:2px
     style UseContingency fill:#d1ecf1,stroke:#17a2b8,stroke-width:2px
     style ReturnError fill:#f8d7da,stroke:#dc3545,stroke-width:2px
-    
-    
-    Approved --> SetupContingency[Configurar Tabela<br/>de Contingência<br/> **Time ME1 Growth**]
-    SetupContingency --> Monitor[Monitorar Performance<br/>via endpoint de métricas]
-    
-    Monitor --> End([Sistema em Produção])
     
     style Start fill:#e1f5ff,stroke:#2196F3,stroke-width:3px
     style Approved fill:#d4edda,stroke:#28a745,stroke-width:3px
     style End fill:#d4edda,stroke:#28a745,stroke-width:3px
     style PartnerProgram fill:#fff3cd,stroke:#ffc107,stroke-width:2px
     style FixIssues fill:#f8d7da,stroke:#dc3545,stroke-width:2px
-            </div>
+                </div>
             
             <div class="legend">
                 <h3>Legenda de Cores</h3>
@@ -274,6 +274,7 @@ flowchart TD
                     <li><strong>Verde:</strong> Aprovação e conclusão</li>
                     <li><strong>Amarelo:</strong> Ações necessárias antes de continuar</li>
                     <li><strong>Vermelho:</strong> Problemas que precisam ser corrigidos</li>
+                    <li><strong>Violete:</strong> Seguimento do fluxo</li>
                 </ul>
             </div>
         </div>
@@ -429,6 +430,8 @@ flowchart TD
                     <li><a href="https://developers.mercadolivre.com.br/pt_br/frete-dinamico" target="_blank">Documentação Oficial - Frete Dinâmico</a></li>
                     <li><a href="https://developers.mercadolivre.com.br/pt_br/primeiros-passos" target="_blank">Primeiros Passos - Mercado Livre API</a></li>
                     <li><a href="https://tools.ietf.org/html/rfc7234" target="_blank">RFC 7234 - HTTP Caching</a></li>
+                    <li><a href= ""target="_blank">Collection de Teste</a></li>
+
                 </ul>
             </div>
         </div>
