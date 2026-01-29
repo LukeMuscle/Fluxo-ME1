@@ -208,7 +208,7 @@
             
             <div class="mermaid">
 flowchart TD
-    Start([Início: Integrador em Processo de Homologação<br/><b>Time OP</b>]) --> CheckCert{É Integrador<br/>ME1?}
+    Start([Início: Integrador em Processo de Homologação<br/><b>Time OP Estratégia</b>]) --> CheckCert{É Integrador<br/>ME1?}
     CheckCert -->|Não| PartnerProgram[Participar do DPP<br/>em sua categoria de desenvolvimento]
     CheckCert -->|Sim| CreateEndpoint[Criar Endpoint GET<br/>conforme especificações de teste<br/><b>Integrador</b>]
     
@@ -221,13 +221,13 @@ flowchart TD
     
     TestPerformance -->|≤ 400ms| PrepareDocs[Preparar Documentação:<br/>- URL do endpoint<br/>- Headers necessários<br/>- Formato JSON<br/>- Nome e ID da aplicação<br/>- Vídeo demonstrativo<br/><b>Integrador</b>]
     
-    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/><b>Time OP e ME1 IT</b>]
+    PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/><b>Time OP Estratégia e ME1 IT</b>]
     
     MELITests -->|Aprovado| Approved[Homologação Aprovada]
     %% Losango compacto abaixo da aprovação (texto com quebras de linha e fonte reduzida)
     Approved --> ActivateIntegrator{Ativar Integrador<br/>Central ME1<br/><b>Time ME1 IT</b>}
 
-    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/><b>Time OP e Integrador</b>]
+    MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/><b>Time OP Estratégia e Integrador</b>]
     FixIssues --> ValidateSpec[Validar especificação Collection de teste<br/>vide Recursos Adicionais<br/><b>Integrador</b>]
     FixIssues -->|Retestar / Reprocessar| ErrorOccurs[Erro ocorre no<br/>endpoint do integrador]
 
