@@ -193,8 +193,7 @@
                 <li><a href="#fluxo-principal">1. Fluxo Principal de Homologação</a></li>
                 <li><a href="#estruturas">2. Estruturas de Dados</a></li>
                 <li><a href="#checklist">3. Checklist de Homologação</a></li>
-                 <li><a href="#Recursos">4. Recursos Adicionais</a></li>
-
+                <li><a href="#Recursos">4. Recursos Adicionais</a></li>
             </ul>
         </div>
         
@@ -224,48 +223,21 @@ flowchart TD
     PrepareDocs --> MELITests[Mercado Livre realiza:<br/>- Testes técnicos<br/>- Avaliação de segurança<br/>- Verificação de conformidade<br/><b>Time OP Estratégia e ME1 IT</b>]
     
     MELITests -->|Aprovado| Approved[Homologação Aprovada]
-    %% Losango compacto abaixo da aprovação (texto com quebras de linha e fonte reduzida)
-    Approved --> ActivateIntegrator{Ativar Integrador<br/>Central ME1<br/><b>Time ME1 IT</b>}
-
+    Approved --> ActivateIntegrator[Ativar Integrador<br/>Central ME1<br/><b>Time ME1 IT</b>]
+    
     MELITests -->|Rejeitado| FixIssues[Corrigir problemas<br/>identificados<br/><b>Time OP Estratégia e Integrador</b>]
-    FixIssues --> ValidateSpec[Validar especificação Collection de teste<br/>vide Recursos Adicionais<br/><b>Integrador</b>]
-    FixIssues -->|Retestar / Reprocessar| ErrorOccurs[Erro ocorre no<br/>endpoint do integrador]
+    FixIssues --> ValidateSpec
 
-    %% Segundo fluxo (original)
-    ErrorOccurs --> ErrorType{Tipo de<br/>Erro?}
-    
-    ErrorType -->|Erro Interno -1| ActivateContingency[Ativar Tabela<br/>de Contingência]
-    ErrorType -->|Produto sem estoque 1| ShowAlternatives[Mostrar produtos<br/>alternativos]
-    ErrorType -->|Destino inválido 2| CheckContingencyTable{Consultar Tabela<br/>de Contingência}
-    ErrorType -->|Sem cobertura 3| CheckContingencyTable
-    ErrorType -->|Produto não encontrado 4| UpdateDatabase[Atualizar banco<br/>de dados]
-    
-    CheckContingencyTable -->|Tem dados| UseContingency[Usar dados da<br/>Tabela de Contingência]
-    CheckContingencyTable -->|Sem dados| ReturnError[Retornar erro<br/>ao comprador]
-    
-    ActivateContingency --> UseContingency
-    UseContingency --> ReturnQuote[Retornar cotação<br/>da contingência]
-    
-    ShowAlternatives --> End([Fim])
-    ReturnError --> End
-    ReturnQuote --> End
-    UpdateDatabase --> End
-    
     ActivateIntegrator --> SetupContingency[Configurar Tabela<br/>de Contingência<br/><b>Time ME1 Growth</b>]
     SetupContingency --> Monitor[Monitorar Performance<br/>via endpoint de métricas]
     Monitor --> End([Sistema em Produção])
-    
-    %% Estilos / classes
-    style ActivateContingency fill:#fff3cd,stroke:#ffc107,stroke-width:2px
-    style UseContingency fill:#d1ecf1,stroke:#17a2b8,stroke-width:2px
-    style ReturnError fill:#f8d7da,stroke:#dc3545,stroke-width:2px
     
     style Start fill:#e1f5ff,stroke:#2196F3,stroke-width:3px
     style Approved fill:#d4edda,stroke:#28a745,stroke-width:3px
     style End fill:#d4edda,stroke:#28a745,stroke-width:3px
     style PartnerProgram fill:#fff3cd,stroke:#ffc107,stroke-width:2px
     style FixIssues fill:#f8d7da,stroke:#dc3545,stroke-width:2px
-                </div>
+            </div>
             
             <div class="legend">
                 <h3>Legenda de Cores</h3>
@@ -274,7 +246,6 @@ flowchart TD
                     <li><strong>Verde:</strong> Aprovação e conclusão</li>
                     <li><strong>Amarelo:</strong> Ações necessárias antes de continuar</li>
                     <li><strong>Vermelho:</strong> Problemas que precisam ser corrigidos</li>
-                    <li><strong>Violete:</strong> Seguimento do fluxo</li>
                 </ul>
             </div>
         </div>
@@ -380,7 +351,7 @@ classDiagram
             
             <div class="mermaid">
 flowchart TD
-    Start([Checklist de Homologação]) --> C1[✓ Integrador ME1</b> Processo de homologação]
+    Start([Checklist de Homologação]) --> C1[✓ Integrador ME1<br/>Processo de homologação]
     C1 --> C2[✓ Endpoint GET criado]
     C2 --> C3[✓ Request formatado corretamente]
     C3 --> C4[✓ Response formatada corretamente]
@@ -430,8 +401,7 @@ flowchart TD
                     <li><a href="https://developers.mercadolivre.com.br/pt_br/frete-dinamico" target="_blank">Documentação Oficial - Frete Dinâmico</a></li>
                     <li><a href="https://developers.mercadolivre.com.br/pt_br/primeiros-passos" target="_blank">Primeiros Passos - Mercado Livre API</a></li>
                     <li><a href="https://tools.ietf.org/html/rfc7234" target="_blank">RFC 7234 - HTTP Caching</a></li>
-                    <li><a href= ""target="_blank">Collection de Teste</a></li>
-
+                    <li><a href="" target="_blank">Collection de Teste</a></li>
                 </ul>
             </div>
         </div>
